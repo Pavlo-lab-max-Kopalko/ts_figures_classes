@@ -22,8 +22,14 @@ export class Triangle implements Figure {
       throw new Error('your error message');
     }
 
-    if (a + b > c || a + c > b || b + c > a) {
-      throw new Error('your error message');
+    const biggestSide = Math.max(this.a, this.b, this.c);
+
+    if (
+      this.a + this.b <= biggestSide ||
+      this.a + this.c <= biggestSide ||
+      this.b + this.c <= biggestSide
+    ) {
+      throw new Error('it is not a triangle');
     }
   }
 
@@ -47,10 +53,11 @@ export class Circle implements Figure {
     }
   }
 
-  getArea(radius = this.radius) {
-    const s = Math.PI * radius * radius;
+  getArea(): number {
+    const squareCircle = Math.PI * this.radius ** 2;
+    const squareRounded = Math.floor(squareCircle * 100) / 100;
 
-    return Number(s.toFixed(2));
+    return squareRounded;
   }
 }
 
